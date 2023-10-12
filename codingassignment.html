@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>container</title>
+</head>
+<body>
+    <style>
+        .ball {
+            position: absolute;
+            border-radius: 70%;
+            height: 70px;
+            width: 70px;
+        }
+        </style>
+</head>
+<body>
+    <div id="container" style=" border-style: solid; margin: 20px;
+    background-color: lightgray; height: 650px; width: 1300px;"></div>
+    <script>
+        
+        var container1 = document.getElementById("container");
+    var palet = ['red', 'blue', 'green', 'black', 'yellow','orange','pink'];
+        var balls =[];
+        var x_pos =[];
+        var y_pos =[];
+        var x_vel =[];
+        var y_vel =[];
+        var gravity =1;
+
+
+        function getRandom(scale) {
+            return (Math.random() * scale);
+        }
+
+ function makeball(color, xpos, ypos, xvel, yvel) {
+            var ball1 = document.createElement("div");
+
+            ball1.classList.add("ball");
+            ball1.style.background = color;
+            ball1.style.left = xpos + 'px';
+            ball1.style.top = ypos + 'px';
+            document.body.appendChild(ball1);
+ balls.push(ball1);
+            x_pos.push(xpos);
+            y_pos.push(ypos);
+            x_vel.push(xvel);
+            y_vel.push(yvel);
+        }
+
+    
+        function update() {
+        
+            for (let i = 0; i < balls.length; i++) {
+                
+                x_pos[i] += x_vel[i];
+                y_pos[i] += y_vel[i];
+
+                if ((x_pos[i] <= 0 +20)||(x_pos[i] > 1000 ) ){
+                    
+                      x_vel[i] = -x_vel[i] * gravity;
+                } 
+               if ((y_pos[i] <= 0 +20 ) ||(y_pos[i] > 400 ) ) {
+                    
+                    y_vel[i] = -y_vel[i] * gravity;
+                
+                }
+                balls[i].style.left = x_pos[i] + 'px';
+                balls[i].style.top = y_pos[i] + 'px';
+            }
+            setTimeout(update,100);
+        }
+
+         function create(n) {
+            for (let i = 1; i <= n; i++) {
+                let color = palet[Math.floor(Math.random() * 5)];
+                var xpos = getRandom(1000);
+                var ypos = getRandom(400);
+                var xvel = Math.random()*20 -10; 
+                var yvel = Math.random()*20 -10; 
+                     makeball(color, xpos, ypos, xvel, yvel);
+            }
+
+             update();
+        }
+
+        create(5); 
+    </script>
+</body>
+</html>
+
+
+    </script>
+    
+</body>
+</html>
